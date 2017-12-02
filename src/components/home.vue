@@ -1,11 +1,11 @@
 <template>
-<div>
+<div class='nav'>
   <!-- 轮播 -->
   <div>
     <app-banner :listImg="listImg"></app-banner>
   </div>
   <!-- 推荐 -->
-  <div>
+  <div class='recommend'>
     <ul>
       <li class='tel'>
         <h1>风格推荐</h1>
@@ -14,6 +14,32 @@
       <li class='ter'> MORE > </li>
     </ul>
     <app-style></app-style>
+  </div>
+  <div class='fenge'></div>
+  <!-- 演出列表 -->
+  <div>
+    <h1 class='tel show'>演出活动</h1>
+    <div class='list-yanchu' v-for='item in list2'>
+      <div class='yanchu-content'>
+        <ul class='list-yanchu-top'>
+          <li class='left'><span class='back-img' :style="{ backgroundImage: 'url(' + item.url + ')' }"></span></li>
+          <li class='right'>
+            <ol class='details'>
+              <li class='title'>{{item.title}}</li>
+              <li class='date'>时间:{{item.date}}</li>
+              <li class='adress'>场馆:{{item.adress}}</li>
+              <li class='logo'><span class='leibie'><i class='music'></i>{{item.logo}}</span></li>
+            </ol>
+          </li>
+        </ul>
+        <ul class='list-yanchu-bottom'>
+          <li class='price'>￥{{item.price}}</li>
+          <li class='collet'><i class='collet-logo'></i>{{item.collet}}</li>
+        </ul>
+      </div>
+      <div class='fenge'></div>
+    </div>
+    
   </div>
 </div>
 </template>
@@ -31,44 +57,179 @@ export default {
           {url: '../../static/image/home/banner4.jpg'},
           {url: '../../static/image/home/banner5.jpg'}
         ],
-      list1Img:[
-          {url: '../../static/image/home/banner1.jpg'},
-          {url: '../../static/image/home/banner2.jpg'},
-          {url: '../../static/image/home/banner3.jpg'},
-          {url: '../../static/image/home/banner4.jpg'},
-          {url: '../../static/image/home/banner5.jpg'}
+        list2:[
+          {
+            url:'../../static/image/home/qiyingli.jpeg',
+            title:'迷蝶 后摇  The seven mile journey',
+            date:'12.06 20:00 本周三',
+            adress:'迷蝶酒吧[西安]',
+            logo:'后摇滚',
+            price:'100',
+            collet:'66'
+          },
+          {
+            url:'../../static/image/home/sude.jpg',
+            title:'1973 摇滚 Sude(山羊皮)',
+            date:'12.09 20:00 本周六',
+            adress:'1973酒吧[西安]',
+            logo:'后摇',
+            price:'120',
+            collet:'99'
+          },
+          {
+            url:'../../static/image/home/tangchao.jpeg',
+            title:'迷蝶固定场 金属摇滚 唐朝乐队',
+            date:'12.01 20:00 下周五',
+            adress:'迷蝶酒吧[西安]',
+            logo:'摇滚',
+            price:'80',
+            collet:'33'
+          }
         ]
     }
   },
   components:{'app-banner': Banner,'app-style':Style}
 }
+
+$(function(){
+  $("div[class='fenge']:last").css({'height':'2rem','line-height':'2rem'}).html('我是有底线的');
+})
+
 </script>
 
 <style>
-.tel{text-align: left;}
+ul{
+  margin:0;
+  padding:0;
+}
+.nav{
+  margin-top:2.5rem;
+  margin-bottom: 3rem;
+}
+.recommend{margin:8px;}
+.tel{
+  text-align: left;
+  padding-bottom:0.5rem;
+}
 .ter{
   text-align: right;
   font-size:1rem;
   color:#FA5509;
-  margin-top:0.5rem;
+  height:100%;
+  line-height: 300%;
 }
 h1{
   font-size:1.2rem;
   font-weight: normal;
   margin:0;
 }
-ul{
-  height:3rem;
+.recommend ul{
+  height:2rem;
   padding:0;
   margin-top:0.5rem;
   margin-bottom:0;
 }
-ul>li{
+.recommend ul>li{
   width:50%;
   float:left;
   list-style: none;
 }
 .tishi{
   font-size:0.3rem;
+}
+.yanchu-content{
+  margin:8px;
+}
+.yanchu-content ul{
+  padding:0;
+}
+.show{
+  border-bottom:2px solid #eee;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+}
+.list-yanchu{
+  padding-top:0.5rem;
+}
+.yanchu-content .list-yanchu-top{
+  height:8rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #eee;
+}
+.yanchu-content li{
+  float:left;
+  list-style: none;
+}
+.list-yanchu-top>.left{
+  width:35%;
+  height:100%;
+}
+.list-yanchu-top>.right{
+  width:60%;
+  height:100%;
+}
+.list-yanchu-top>li>.back-img{
+  display:inline-block;
+  border-radius: 8px;
+  width:85%;
+  height:100%;
+  background-size: 100% 100%;
+}
+.details{
+  height:100%;
+  padding:0;
+  position:relative;
+}
+.details li{
+  width:100%;
+  list-style: none;
+  text-align: left;
+  font-size:0.5rem;
+  color:#666;
+}
+.details .title{
+  margin-bottom:0.8rem;
+  font-size: 1rem;
+  color:#000;
+}
+.details .logo{
+  position:absolute;
+  bottom:0.5rem;
+  left:0;
+}
+.details .logo .leibie{
+  background:#eee;
+  border-radius: 10px;
+  padding:0.4rem;
+}
+.details .logo .music{
+  display:inline-block;
+  width:0.8rem;
+  height:0.8rem;
+  background-image: url(../../static/image/home/music.png);
+  background-size: 100% 100%;
+}
+.list-yanchu-bottom{
+  height:2rem;
+  margin:0.5rem;
+}
+.list-yanchu-bottom li{
+  width:50%;
+  height:100%;
+  line-height: 200%;
+}
+.price{text-align: left;}
+.collet{text-align: right;}
+.collet-logo{
+  display: inline-block;
+  width:1rem;
+  height:1rem;
+  background-image: url(../../static/image/home/like.png);
+  background-size: 100% 100%;
+  margin-right:0.5rem;
+}
+.fenge{
+  height:0.7rem;
+  background:#eee;
 }
 </style>

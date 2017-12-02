@@ -1,5 +1,5 @@
 <template>
-	<ul>
+	<ul class='header'>
 		<li class='adress'>{{adress}}<i class='jiantou down'></i></li>
 		<li class='title'>秀动</li>
 		<li class='logo'><i class='date'></i><i class='search'></i></li>
@@ -23,11 +23,19 @@ $(function(){
 </script>
 
 <style scoped>
+	.header{
+		position:fixed;
+		top:0;
+		left:0;
+		right:0;
+		z-index: 999;
+		background:#fff;
+		border-bottom: 1px solid #eee;
+	}
 	ul{
-		width:100%;
 		height:2rem;
-		padding:0;
-		margin:0.5rem auto;
+		padding:0.5rem;
+		margin:0;
 	}
 	ul>li{
 		list-style: none;

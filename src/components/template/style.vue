@@ -2,7 +2,9 @@
     <div class="style">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="str1 in list1Img" v-text=str1.name :style="{ backgroundImage: 'url(' + str1.url + ')' }"></div>
+                <div class="swiper-slide" v-for="str1 in list1Img" :style="{ backgroundImage: 'url(' + str1.url + ')' }">
+                    <span v-text=str1.name></span>
+                </div>
             </div>
         </div>
     </div>
@@ -14,11 +16,12 @@
         data () {
             return {
                 list1Img:[
-                    {name:'金属',url: '../../static/image/home/banner1.jpg'},
-                    {name:'后摇',url: '../../static/image/home/banner2.jpg'},
-                    {name:'民谣',url: '../../static/image/home/banner3.jpg'},
-                    {name:'摇滚',name:'金属',url: '../../static/image/home/banner4.jpg'},
-                    {name:'嘻哈',url: '../../static/image/home/banner5.jpg'}
+                    {name:'金属 Metal',url: '../../static/image/home/jinshu.jpeg'},
+                    {name:'后摇',url: '../../static/image/home/houyao.jpg'},
+                    {name:'民谣',url: '../../static/image/home/minyao.jpeg'},
+                    {name:'摇滚',url: '../../static/image/home/yaogun.jpeg'},
+                    {name:'流行',url: '../../static/image/home/liuxing.jpeg'},
+                    {name:'嘻哈',url: '../../static/image/home/xiha.jpeg'}
                 ]
             }
         },
@@ -38,7 +41,14 @@
     .style .swiper-container {
         width: 100%;
         height: 5rem;
-        margin: 0.5rem auto;
+        margin: 1rem auto;
+        margin-bottom:1rem;
+    }
+    .style .swiper-container span{
+        position:absolute;
+        bottom:0;
+        left:0.5rem;
+        font-size: 1rem;
     }
     .style .swiper-slide {
         text-align: center;
