@@ -1,5 +1,7 @@
 <template>
 <div class='nav'>
+  <!-- 引入公共头部 -->
+    <Pheader></Pheader>
   <!-- 轮播 -->
   <div>
     <app-banner :listImg="listImg"></app-banner>
@@ -13,13 +15,14 @@
       </li>
       <li class='ter'> MORE > </li>
     </ul>
+    <!-- 引入style -->
     <app-style></app-style>
   </div>
   <div class='fenge'></div>
   <!-- 演出列表 -->
   <div>
     <h1 class='tel show'>演出活动</h1>
-    <div class='list-yanchu' v-for='item in list2'>
+    <div class='list-yanchu' v-for='item in list'>
       <div class='yanchu-content'>
         <ul class='list-yanchu-top'>
           <li class='left'><span class='back-img' :style="{ backgroundImage: 'url(' + item.url + ')' }"></span></li>
@@ -28,13 +31,13 @@
               <li class='title'>{{item.title}}</li>
               <li class='date'>时间:{{item.date}}</li>
               <li class='adress'>场馆:{{item.adress}}</li>
-              <li class='logo'><span class='leibie'><i class='music'></i>{{item.logo}}</span></li>
+              <li class='logo'><span class='leibie'><i class='icon iconfont icon-1'></i>{{item.logo}}</span></li>
             </ol>
           </li>
         </ul>
         <ul class='list-yanchu-bottom'>
           <li class='price'>￥{{item.price}}</li>
-          <li class='collet'><i class='collet-logo'></i>{{item.collet}}</li>
+          <li class='collet'><i class='icon iconfont icon-shoucang'></i>{{item.collet}}</li>
         </ul>
       </div>
       <div class='fenge'></div>
@@ -45,8 +48,10 @@
 </template>
 
 <script>
+import Pheader from './template/pheader'
 import Banner from './template/banner'
 import Style from './template/style'
+import {setCookie,getCookie} from './../cookie.js'
 export default {
   data () {
     return {
@@ -57,7 +62,7 @@ export default {
           {url: '../../static/image/home/banner4.jpg'},
           {url: '../../static/image/home/banner5.jpg'}
         ],
-        list2:[
+        list:[
           {
             url:'../../static/image/home/qiyingli.jpeg',
             title:'迷蝶 后摇  The seven mile journey',
@@ -88,22 +93,33 @@ export default {
         ]
     }
   },
-  components:{'app-banner': Banner,'app-style':Style}
+  components:{Pheader,'app-banner': Banner,'app-style':Style},
+  mounted(){
+            /*页面挂载获取保存的cookie值，渲染到页面上*/
+            let uname = getCookie('username')
+            this.name = uname
+            /*如果cookie不存在，则跳转到登录页*/
+            if(uname == ""){
+                this.$router.push('/')
+            }
+  },
+  mounted(){
+      $("div[class='fenge']:last").css({'height':'2rem','line-height':'2rem'}).html('我是有底线的');
+      window.scrollTo(0,0);
+  },
+  methods:{
+            quit(){
+                /*删除cookie*/
+                delCookie('username')
+            }
+  }
 }
-
-$(function(){
-  $("div[class='fenge']:last").css({'height':'2rem','line-height':'2rem'}).html('我是有底线的');
-})
 
 </script>
 
 <style>
-ul{
-  margin:0;
-  padding:0;
-}
 .nav{
-  margin-top:2.5rem;
+  margin-top:3rem;
   margin-bottom: 3rem;
 }
 .recommend{margin:8px;}
@@ -202,13 +218,6 @@ h1{
   border-radius: 10px;
   padding:0.4rem;
 }
-.details .logo .music{
-  display:inline-block;
-  width:0.8rem;
-  height:0.8rem;
-  background-image: url(../../static/image/home/music.png);
-  background-size: 100% 100%;
-}
 .list-yanchu-bottom{
   height:2rem;
   margin:0.5rem;
@@ -220,16 +229,11 @@ h1{
 }
 .price{text-align: left;}
 .collet{text-align: right;}
-.collet-logo{
-  display: inline-block;
-  width:1rem;
-  height:1rem;
-  background-image: url(../../static/image/home/like.png);
-  background-size: 100% 100%;
-  margin-right:0.5rem;
-}
 .fenge{
   height:0.7rem;
   background:#eee;
+}
+.list-yanchu .iconfont{
+  font-size:1rem;
 }
 </style>

@@ -3,7 +3,7 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="str1 in list1Img" :style="{ backgroundImage: 'url(' + str1.url + ')' }">
-                    <span v-text=str1.name></span>
+                    <span v-text='str1.name'></span>
                 </div>
             </div>
         </div>
