@@ -125,7 +125,7 @@
 }
 .show-find{
 	font-weight: bold;
-	margin-bottom:3rem;
+	margin-bottom:2rem;
 }
 .xiahua{
 	display: block;

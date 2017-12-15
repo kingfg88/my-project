@@ -11,14 +11,17 @@ export default {
     return {
       adress: '西安'
     }
-  }
-}
-
-$(function(){
+  },
+  mounted(){
+  	$(function(){
 	$('.adress').click(function(){
 		$('.jiantou').addClass('up');
 	});
 })
+  }
+}
+
+
 
 </script>
 
@@ -28,7 +31,7 @@ $(function(){
 		top:0;
 		left:0;
 		right:0;
-		z-index: 999;
+		z-index: 10;
 		background:#fff;
 		border-bottom: 1px solid #eee;
 		height:3rem;
@@ -57,7 +60,8 @@ $(function(){
 	}
 	.up{
 		transform:rotate(180deg);
-		transition:transform 1s;
+		transform-origin:8px 24px;
+		transition:transform 0.5s;
 	}
 	.title{
 		font-size: 20px;

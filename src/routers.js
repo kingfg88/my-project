@@ -1,5 +1,7 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import store from './vuex/store'
+import {setCookie,getCookie} from './cookie.js'
 
 import home from './components/home'
 import find from './components/find'
@@ -26,27 +28,41 @@ const routes = [
         component: find
     },
     {
-        path: "/msg",
-        component: msg
+        path: "/login",
+        component: login,
     },
     {
-        path: "/login",
-        component: login
+        path: "/msg",
+        component: msg,
+        meta:{
+            auth: true // 这里设置，当前路由需要校验
+        }
     },
-    ,
     {
         path: "/my",
-        component: my
+        component: my,
+        meta:{
+            auth: true // 这里设置，当前路由需要校验
+        }
     }
 ]
 
 const router = new VueRouter({
-      routes // routes: routes 的简写
+      routes
+})
+
+// 设置动态路由
+router.beforeEach((to,from,next)=>{
+    if(to.path==='./lgoin'){
+        next();
+    }else{
+        if(to.meta.auth && !getCookie('username')) { 
+            next({path:'./login'})
+        }else{
+            next()
+        }
+    }
 })
 
 export default router; //将路由器导出
-
-// const app = new Vue({
-//   router
-// }).$mount('#app')
 

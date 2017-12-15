@@ -19,6 +19,7 @@
 	</div>
 </template>
 <script>
+  // import {setCookie,getCookie} from './../cookie.js'
 	export default{
 		data () {
 			return{

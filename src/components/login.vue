@@ -1,7 +1,7 @@
 <template>
 	<div class="login">
 		<div class="header-login">
-			<i class='close icon iconfont icon-guanbi'></i>
+			<i class='close icon iconfont icon-guanbi' @click='closed()'></i>
 		</div>
 		<div class="nav-login">
 			<i class="logo"></i>
@@ -9,17 +9,19 @@
           <p v-show="showTishi">{{tishi}}</p>
           <div class="uname">
             <span>+86</span>
-            <input type="text" placeholder="请输入用户名" v-model="username">
+            <input type="text" placeholder="请输入手机号码" v-model="username">
           </div>
+          
           <div class="pword">
             <input type="password" placeholder="请输入密码" v-model="password">
             <i :class="{ 'icon iconfont icon-yanjingbiqilai': close, 'icon iconfont icon-zhengyan': open }" @click='change()'></i>
           </div>
+          
           <button v-on:click="login">登录</button>
           <span>
-            <span v-on:click="ToRegister">注册帐号</span>
-            <i class='fengexian'>|</i>
-            <span>忘记密码</span>
+            <span v-on:click="ToRegister">还没帐号?立即注册</span>
+            <!-- <i class='fengexian'>|</i>
+            <span>忘记密码</span> -->
           </span>
       </div>
 
@@ -27,12 +29,14 @@
           <p v-show="showTishi">{{tishi}}</p>
           <div class="uname">
             <span>+86</span>
-            <input type="text" placeholder="设置用户名" v-model="newUsername">
+            <input type="text" placeholder="请输入手机号码" v-model="newUsername"  @blur='utishi()'>
           </div>
+          <span v-show="usertishi">{{usermsg}}</span>
           <div class="pword">
-            <input type="password" placeholder="设置登录密码" v-model="newPassword">
-            <i :class="{ 'icon iconfont icon-biyan': open, 'icon iconfont icon-zhengyan': close }" @click='change()'></i>
+            <input type="password" placeholder="请设置登录密码" v-model="newPassword"  @blur='ptishi()'>
+            <i :class="{ 'icon iconfont icon-yanjingbiqilai': close, 'icon iconfont icon-zhengyan': open }" @click='change()'></i>
           </div>
+          <span v-show="pwordtishi">{{pwordmsg}}</span>
           <button v-on:click="register">注册</button>
           <span v-on:click="ToLogin">已有账号？马上登录</span>
       </div>
@@ -53,25 +57,60 @@
         newUsername: '',
         newPassword: '',
         close:true,
-        open:false
+        open:false,
+        usertishi:false,
+        usermsg:'',
+        pwordtishi:false,
+        pwordmsg:''
 			}
 		},
 		mounted(){
-  			/*页面挂载获取cookie，如果存在username的cookie，则跳转到主页，不需登录*/
+  			/*页面挂载获取cookie，如果存在username的cookie，则跳转到my，不需登录*/
    			if(getCookie('username')){
         		this.$router.push('/my')
         	}
     	},
     	methods:{
-        // 密码是否明文
+        closed(){
+          this.$router.push('/home')
+        },
+        // 注册登录密码是否明文
         change(){
             this.close=!this.close;
             this.open=!this.open;
-            if($('.pword>input')[0].type=='text'){
-              $('.pword>input')[0].type='password'
-            }else{
-              $('.pword>input')[0].type='text'
+            for(var i=0;i<$('.pword>input').length;i++){
+              if($('.pword>input')[i].type=='text'){
+                $('.pword>input')[i].type='password'
+              }else{
+                $('.pword>input')[i].type='text'
+              }
             }
+        },
+        // 手机号码验证
+        utishi(){
+          if(this.newUsername.length == 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/.test(this.newUsername)){
+            this.usermsg='',
+            this.usertishi=false
+          }else if(this.newUsername.length==0){
+            this.usermsg='手机号不能为空',
+            this.usertishi=true
+          }else{
+            this.usermsg='您输入的手机号有误',
+            this.usertishi=true
+          }
+        },
+        // 密码验证
+        ptishi(){
+          if(this.newPassword.length >= 6 && /^[a-zA-Z]\w{5,17}$/.test(this.newPassword)){
+            this.pwordmsg='',
+            this.pwordtishi=false
+          }else if(this.newPassword.length==0){
+            this.pwordmsg='密码不能为空',
+            this.pwordtishi=true
+          }else{
+            this.pwordmsg='以字母开头，长度在6~18之间，只能包含字符、数字和下划线',
+            this.pwordtishi=true
+          }
         },
         // 验证
     		login(){
@@ -80,18 +119,15 @@
         		}else{
             		let data = {'username':this.username,'password':this.password}
             		/*接口请求*/
-            		this.$http.get('./../static/data/name.json',data).then((res)=>{
+            		this.$http.post('http://127.0.0.1:3000/login',data,{emulateJSON:true}).then((res)=>{
                 		console.log(res)
              			/*接口的传值是(-1,该用户不存在),(0,密码错误)，同时还会检测管理员账号的值*/
               			if(res.data == -1){
                   			this.tishi = "该用户不存在"
                   			this.showTishi = true
               			}else if(res.data == 0){
-                  			this.tishi = "密码输入错误"
+                  			this.tishi = "用户名或密码输入错误"
                   			this.showTishi = true
-              			}else if(res.data == 'admin'){
-              				/*路由跳转this.$router.push*/
-                  			this.$router.push('/main')
               			}else{
                   			this.tishi = "登录成功"
                   			this.showTishi = true
@@ -108,7 +144,7 @@
                 alert("请输入用户名或密码")
             }else{
                 let data = {'username':this.newUsername,'password':this.newPassword}
-                this.$http.post('./../static/data/name.json',data).then((res)=>{
+                this.$http.post('http://127.0.0.1:3000/register',data,{emulateJSON:true}).then((res)=>{
                     console.log(res)
                     if(res.data == "ok"){
                       this.tishi = "注册成功"

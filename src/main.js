@@ -5,6 +5,7 @@ import App from './App'
 import $ from 'jquery'
 import router from './routers'
 import VueResource from 'vue-resource'
+import store from './vuex/store'
 
 Vue.use(VueResource)
 
@@ -14,6 +15,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,  // 注入到根实例中
+  store,//使用store
   render: h => h(App),
   template: '<App/>',
   components: { App }

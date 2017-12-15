@@ -13,19 +13,19 @@
     import Swiper from 'swiper';
     import 'swiper/dist/css/swiper.min.css';
     export default {
-        data () {
+        data(){
             return {
                 list1Img:[
                     {name:'金属 Metal',url: '../../static/image/home/jinshu.jpeg'},
-                    {name:'后摇',url: '../../static/image/home/houyao.jpg'},
-                    {name:'民谣',url: '../../static/image/home/minyao.jpeg'},
-                    {name:'摇滚',url: '../../static/image/home/yaogun.jpeg'},
-                    {name:'流行',url: '../../static/image/home/liuxing.jpeg'},
-                    {name:'嘻哈',url: '../../static/image/home/xiha.jpeg'}
+                    {name:'后摇 Post-Rock',url: '../../static/image/home/houyao.jpg'},
+                    {name:'民谣 Folk',url: '../../static/image/home/minyao.jpeg'},
+                    {name:'摇滚 Rock',url: '../../static/image/home/yaogun.jpeg'},
+                    {name:'流行 Pop',url: '../../static/image/home/liuxing.jpeg'},
+                    {name:'嘻哈 Hip Hop',url: '../../static/image/home/xiha.jpeg'}
                 ]
             }
         },
-        mounted() {
+        mounted(){
             var swiper = new Swiper('.style .swiper-container', {
                 slidesPerView: 2.2,
                 paginationClickable: true,

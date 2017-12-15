@@ -9,10 +9,9 @@
 		<router-link to='/msg' class='child'>
 			<i class='icon iconfont icon-xiaoxi'></i><p>消息</p>
 		</router-link>
-		<router-link to='/login' class='child'>
+		<router-link to='/my' class='child'>
 			<i class='icon iconfont icon-wode'></i><p>我的</p>
 		</router-link>
-		
 	</div>
 </template>
 <script>
@@ -26,14 +25,13 @@
 		bottom:0;
 		left:0;
 		right:0;
-		z-index: 999;
 		background:#fff;
 		border-top: 1px solid #eee;
 		margin:0;
 		padding:0;
 	}
 	.child .iconfont{
-		font-size: 1.4rem;
+		font-size: 1.5rem;
 		color:#999;
 	}
 	.footer .child{

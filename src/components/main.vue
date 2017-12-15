@@ -18,11 +18,11 @@
     export default{
         data(){
             return{
-                list: ''
+                list:''
             }
         },
         mounted(){
-            this.$http.get('static/data/name.json').then((res)=>{
+            this.$http.get('http://127.0.0.1:3000/info').then((res)=>{
                 this.list = res.data
                 console.log(res)
             })

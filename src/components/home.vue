@@ -1,6 +1,6 @@
 <template>
 <div class='nav'>
-  <!-- 引入公共头部 -->
+  <!-- 引入头部 -->
     <Pheader></Pheader>
   <!-- 轮播 -->
   <div>
@@ -154,7 +154,8 @@ h1{
   font-size:0.3rem;
 }
 .yanchu-content{
-  margin:8px;
+  margin:0.5rem;
+  margin-bottom:0;
 }
 .yanchu-content ul{
   padding:0;
@@ -171,6 +172,7 @@ h1{
   height:8rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid #eee;
+  margin-bottom:0;
 }
 .yanchu-content li{
   float:left;
@@ -220,7 +222,7 @@ h1{
 }
 .list-yanchu-bottom{
   height:2rem;
-  margin:0.5rem;
+  margin:0.2rem;
 }
 .list-yanchu-bottom li{
   width:50%;
