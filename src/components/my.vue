@@ -2,18 +2,22 @@
     <div class='my'>
         <h3>欢迎 {{name}}</h3>
         <button @click="quit">注销登录</button>
+        <!-- 引入公共底部 -->
+        <Pfooter></Pfooter>
     </div>
 </template>
 
 <script>
 /*引入公共方法*/
 import {setCookie,getCookie,delCookie} from './../cookie.js'
+import Pfooter from './template/pfooter'
     export default{
         data(){
             return{
                 name: ''
             }
         },
+        components:{Pfooter},
         mounted(){
             /*页面挂载获取保存的cookie值，渲染到页面上*/
             let uname = getCookie('username')

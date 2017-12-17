@@ -1,6 +1,8 @@
 <template>
 <div class='nav'>
-  <!-- 引入头部 -->
+  <app-style v-show='type'></app-style>
+  <div v-show='home'>
+    <!-- 引入头部 -->
     <Pheader></Pheader>
   <!-- 轮播 -->
   <div>
@@ -16,7 +18,16 @@
       <li class='ter'> MORE > </li>
     </ul>
     <!-- 引入style -->
-    <app-style></app-style>
+    <!-- <app-style></app-style> -->
+    <div class="style">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="str1 in list1Img" :style="{ backgroundImage: 'url(' + str1.url + ')' }" @click='style()'>
+                    <span v-text='str1.name'></span>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
   <div class='fenge'></div>
   <!-- 演出列表 -->
@@ -42,19 +53,27 @@
       </div>
       <div class='fenge'></div>
     </div>
-    
   </div>
+  <!-- 引入公共底部 -->
+  <Pfooter></Pfooter>
+  </div>  
 </div>
 </template>
 
 <script>
 import Pheader from './template/pheader'
+import Pfooter from './template/pfooter'
 import Banner from './template/banner'
-import Style from './template/style'
 import {setCookie,getCookie} from './../cookie.js'
+import Swiper from 'swiper';
+import 'swiper/dist/css/swiper.min.css';
+
+import Style from './template/style'
 export default {
   data () {
     return {
+      home:true,
+      type:false,
       listImg:[
           {url: '../../static/image/home/banner1.jpg'},
           {url: '../../static/image/home/banner2.jpg'},
@@ -62,6 +81,14 @@ export default {
           {url: '../../static/image/home/banner4.jpg'},
           {url: '../../static/image/home/banner5.jpg'}
         ],
+        list1Img:[
+                    {name:'金属 Metal',url: '../../static/image/home/jinshu.jpeg'},
+                    {name:'后摇 Post-Rock',url: '../../static/image/home/houyao.jpg'},
+                    {name:'民谣 Folk',url: '../../static/image/home/minyao.jpeg'},
+                    {name:'摇滚 Rock',url: '../../static/image/home/yaogun.jpeg'},
+                    {name:'流行 Pop',url: '../../static/image/home/liuxing.jpeg'},
+                    {name:'嘻哈 Hip Hop',url: '../../static/image/home/xiha.jpeg'}
+                ],
         list:[
           {
             url:'../../static/image/home/qiyingli.jpeg',
@@ -93,8 +120,16 @@ export default {
         ]
     }
   },
-  components:{Pheader,'app-banner': Banner,'app-style':Style},
+  components:{Pfooter,Pheader,'app-banner': Banner,'app-style':Style},
   mounted(){
+
+            var swiper = new Swiper('.style .swiper-container', {
+                slidesPerView: 2.2,
+                paginationClickable: true,
+                spaceBetween: 10,
+                freeMode: true
+            });
+
             /*页面挂载获取保存的cookie值，渲染到页面上*/
             let uname = getCookie('username')
             this.name = uname
@@ -102,15 +137,18 @@ export default {
             if(uname == ""){
                 this.$router.push('/')
             }
-  },
-  mounted(){
-      $("div[class='fenge']:last").css({'height':'2rem','line-height':'2rem'}).html('我是有底线的');
-      window.scrollTo(0,0);
+            // juery操作dom方法以及设置滚动条
+            $("div[class='fenge']:last").css({'height':'2rem','line-height':'2rem'}).html('我是有底线的');
+            window.scrollTo(0,0);
   },
   methods:{
             quit(){
                 /*删除cookie*/
                 delCookie('username')
+            },
+            style(){
+                this.home=false,
+                this.type=true
             }
   }
 }
@@ -172,7 +210,7 @@ h1{
   height:8rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid #eee;
-  margin-bottom:0;
+  margin:0;
 }
 .yanchu-content li{
   float:left;
@@ -237,5 +275,39 @@ h1{
 }
 .list-yanchu .iconfont{
   font-size:1rem;
+}
+.style .swiper-container {
+        width: 100%;
+        height: 5rem;
+        margin: 1rem auto;
+        margin-bottom:1rem;
+    }
+.style .swiper-container span{
+    position:absolute;
+    bottom:0;
+    left:0.5rem;
+    font-size: 1rem;
+}
+.style .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    color:#fff;
+    background-size:100% 100%;
+        
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
 }
 </style>

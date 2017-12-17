@@ -1,20 +1,13 @@
 <template>
   <div id="app">
     <!-- 引入内容 -->
-    <router-view></router-view> 
-    <!-- 引入公共底部 -->
-    <Pfooter></Pfooter>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 
-import Pfooter from './components/pfooter'
-export default {
-  components:{Pfooter}
-}
 </script>
-
 <style>
 body{margin:0;}
 #app {

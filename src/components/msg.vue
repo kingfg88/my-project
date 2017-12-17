@@ -16,10 +16,13 @@
           <li class='msg-logo'><i class='right-jiantou icon iconfont icon-jiantouyou'></i></li>
       </ul>
     </div>
+    <!-- 引入公共底部 -->
+    <Pfooter></Pfooter>
 	</div>
 </template>
 <script>
   // import {setCookie,getCookie} from './../cookie.js'
+  import Pfooter from './template/pfooter'
 	export default{
 		data () {
 			return{
@@ -41,7 +44,8 @@
           			}
         		]
 			}
-		}
+		},
+    components:{Pfooter}
 	}
 </script>
 <style>

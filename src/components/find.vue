@@ -48,9 +48,12 @@
 
     		<div class='find-fenge'></div>
 		</div>
+    <!-- 引入公共底部 -->
+  <Pfooter></Pfooter>
 	</div>
 </template>
 <script>
+  import Pfooter from './template/pfooter'
 	import Tuijian from './template/tuijian'
 	export default{
 		data () {
@@ -95,7 +98,7 @@
         		]
 			}
 		},
-		components:{Tuijian},
+		components:{Pfooter,Tuijian},
     mounted(){
       $("div[class='qun']:last").css('border-bottom','none');
       window.scrollTo(0,0);
