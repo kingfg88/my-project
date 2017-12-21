@@ -1,7 +1,6 @@
 <template>
-<div class='nav'>
-  <app-style v-show='type'></app-style>
-  <div v-show='home'>
+<div class='native'>
+  <div class='nav'>
     <!-- 引入头部 -->
     <Pheader></Pheader>
   <!-- 轮播 -->
@@ -15,16 +14,19 @@
         <h1>风格推荐</h1>
         <span class='tishi'>根据您的购票历史推荐</span>
       </li>
-      <li class='ter'> MORE > </li>
+      <li class='ter'>
+        <router-link :to="{path: 'allstyle', query: {product: list}}">
+          MORE >
+        </router-link>
+      </li>
     </ul>
-    <!-- 引入style -->
-    <!-- <app-style></app-style> -->
+    
     <div class="style">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="str1 in list1Img" :style="{ backgroundImage: 'url(' + str1.url + ')' }" @click='style()'>
-                    <span v-text='str1.name'></span>
-                </div>
+                <router-link :to="{path: 'style', query: {product: list}}" @click.native='saveName(str1)' class="swiper-slide" v-for="str1 in list1Img" :style="{ backgroundImage: 'url(' + str1.url + ')' }">
+                  <span class='stylename' v-text='str1.name'></span>
+                </router-link>
             </div>
         </div>
     </div>
@@ -33,7 +35,7 @@
   <!-- 演出列表 -->
   <div>
     <h1 class='tel show'>演出活动</h1>
-    <div class='list-yanchu' v-for='item in list'>
+    <router-link :to="{path: 'details', query: {product: item}}" class='list-yanchu' v-for='item in list'>
       <div class='yanchu-content'>
         <ul class='list-yanchu-top'>
           <li class='left'><span class='back-img' :style="{ backgroundImage: 'url(' + item.url + ')' }"></span></li>
@@ -52,7 +54,7 @@
         </ul>
       </div>
       <div class='fenge'></div>
-    </div>
+    </router-link>
   </div>
   <!-- 引入公共底部 -->
   <Pfooter></Pfooter>
@@ -67,13 +69,11 @@ import Banner from './template/banner'
 import {setCookie,getCookie} from './../cookie.js'
 import Swiper from 'swiper';
 import 'swiper/dist/css/swiper.min.css';
-
-import Style from './template/style'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      home:true,
-      type:false,
+      // store:"store",
       listImg:[
           {url: '../../static/image/home/banner1.jpg'},
           {url: '../../static/image/home/banner2.jpg'},
@@ -95,7 +95,7 @@ export default {
             title:'迷蝶 后摇  The seven mile journey',
             date:'12.06 20:00 本周三',
             adress:'迷蝶酒吧[西安]',
-            logo:'后摇滚',
+            logo:'后摇',
             price:'100',
             collet:'66'
           },
@@ -104,7 +104,7 @@ export default {
             title:'1973 摇滚 Sude(山羊皮)',
             date:'12.09 20:00 本周六',
             adress:'1973酒吧[西安]',
-            logo:'后摇',
+            logo:'摇滚',
             price:'120',
             collet:'99'
           },
@@ -113,14 +113,23 @@ export default {
             title:'迷蝶固定场 金属摇滚 唐朝乐队',
             date:'12.01 20:00 下周五',
             adress:'迷蝶酒吧[西安]',
-            logo:'摇滚',
+            logo:'金属',
+            price:'80',
+            collet:'33'
+          },
+          {
+            url:'../../static/image/home/tangchao.jpeg',
+            title:'迷蝶固定场 金属摇滚 唐朝乐队',
+            date:'12.01 20:00 下周五',
+            adress:'迷蝶酒吧[西安]',
+            logo:'金属',
             price:'80',
             collet:'33'
           }
         ]
     }
   },
-  components:{Pfooter,Pheader,'app-banner': Banner,'app-style':Style},
+  components:{Pfooter,Pheader,'app-banner': Banner},
   mounted(){
 
             var swiper = new Swiper('.style .swiper-container', {
@@ -142,13 +151,10 @@ export default {
             window.scrollTo(0,0);
   },
   methods:{
-            quit(){
-                /*删除cookie*/
-                delCookie('username')
-            },
-            style(){
-                this.home=false,
-                this.type=true
+            // 获取只含中文类名并且存入到vuex中
+            saveName(str1){
+                var message=str1.name.replace(/[^\u4e00-\u9fa5]/gi,"")
+                this.$store.commit('change',message)
             }
   }
 }
@@ -156,9 +162,16 @@ export default {
 </script>
 
 <style>
+.native{
+  position:absolute;
+  width:100%;
+}
 .nav{
   margin-top:3rem;
   margin-bottom: 3rem;
+}
+.nav .style{
+  margin-top:0;
 }
 .recommend{margin:8px;}
 .tel{
@@ -171,6 +184,9 @@ export default {
   color:#FA5509;
   height:100%;
   line-height: 300%;
+}
+.ter a{
+  color:#FA5509;
 }
 h1{
   font-size:1.2rem;
@@ -212,7 +228,7 @@ h1{
   border-bottom: 2px solid #eee;
   margin:0;
 }
-.yanchu-content li{
+.yanchu-content  li{
   float:left;
   list-style: none;
 }
@@ -231,29 +247,29 @@ h1{
   height:100%;
   background-size: 100% 100%;
 }
-.details{
+.yanchu-content .details{
   height:100%;
   padding:0;
   position:relative;
 }
-.details li{
+.yanchu-content .details li{
   width:100%;
   list-style: none;
   text-align: left;
   font-size:0.5rem;
   color:#666;
 }
-.details .title{
+.yanchu-content .details .title{
   margin-bottom:0.8rem;
   font-size: 1rem;
   color:#000;
 }
-.details .logo{
+.yanchu-content .details .logo{
   position:absolute;
-  bottom:0.5rem;
+  bottom:0;
   left:0;
 }
-.details .logo .leibie{
+.yanchu-content .details .logo .leibie{
   background:#eee;
   border-radius: 10px;
   padding:0.4rem;
@@ -269,6 +285,7 @@ h1{
 }
 .price{text-align: left;}
 .collet{text-align: right;}
+.collet i{margin-right:0.5rem;}
 .fenge{
   height:0.7rem;
   background:#eee;

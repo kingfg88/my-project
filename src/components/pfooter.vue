@@ -3,7 +3,7 @@
 		<router-link to='/home' class='child' exact>
 			<i class='icon iconfont icon-shouye'></i><p>首页</p>
 		</router-link>
-		<router-link to='/find' class='child'>
+		<router-link to='/find' class='child' @click.native='$router.goBack()'>
 			<i class='icon iconfont icon-faxian'></i><p>发现</p>
 		</router-link>
 		<router-link to='/msg' class='child'>

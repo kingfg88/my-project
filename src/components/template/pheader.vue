@@ -48,7 +48,7 @@ export default {
 	}
 	.adress{
 		text-align: left;
-		font-size:16px;
+		font-size:0.9rem;
 	}
 	i{
 		display:inline-block;
@@ -64,7 +64,7 @@ export default {
 		transition:transform 0.5s;
 	}
 	.title{
-		font-size: 20px;
+		font-size: 1rem;
 		font-weight: bold;
 	}
 	.logo{

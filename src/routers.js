@@ -9,19 +9,37 @@ import msg from './components/msg'
 import login from './components/login'
 import my from './components/my'
 
+import style from './components/template/style'
+import allstyle from './components/template/allstyle'
+import details from './components/template/details'
+
 
 Vue.use(VueRouter);
 
-// const router = new VueRouter(); //这里可以带有路由器的配置参数
 
 const routes = [
 	{
         path: '/', 
-        redirect: '/home' 
+        redirect: '/home'
     },
     {
         path:"/home",
         component: home
+    },
+    {
+        path:'/style',
+        component:style,
+        meta:{
+            keepAlive: true // 需要被缓存
+        }
+    },
+    {
+        path:'/allstyle',
+        component:allstyle
+    },
+    {
+        path:'/details',
+        component:details
     },
     {
         path: "/find",
@@ -63,6 +81,11 @@ router.beforeEach((to,from,next)=>{
         }
     }
 })
+// 设置返回动画
+router.goBack = function () { 
+　　this.isBack = true
+　　window.history.go(-1)
+}
 
 export default router; //将路由器导出
 

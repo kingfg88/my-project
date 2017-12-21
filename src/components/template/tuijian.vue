@@ -42,16 +42,16 @@
 </script>
 <style>
     .tuijian{
-        padding-left:2rem;
+        padding-left:1rem;
     }
     .tuijian .swiper-container {
         width: 100%;
         height: 9rem;
         margin: 1rem auto;
-        margin-bottom:1rem;
+        margin-bottom: 0;
     }
     .tuijian .swiper-container .back-img{
-        height:78%;
+        height:70%;
         width:90%;
         background-size:100% 100%;
         position:relative;
