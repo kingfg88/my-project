@@ -2,29 +2,29 @@
 <div class='Router'>
   <div class="style">
     <div class="header-style">
-      <i class='icon iconfont icon-fanhui' @click='$router.goBack()'></i>
+      <i class='icon iconfont icon-fanhui' @click='$router.goBack();toBack()'></i>
       <h1>{{$store.state.msg}}</h1>
     </div>
     <!-- 演出列表 -->
   <div class='list'>
-      <router-link :to="{path: 'details', query: {product: list}}" class='list-style' v-for='list in this.$store.state.lists'>
+      <router-link :to="{path: 'details', query: {product: item}}" class='list-style' v-for='item in items'>
       <div class='style-content'>
         <ul class='list-style-top'>
           <li class='left'>
-            <span class='back-img' :style="{ backgroundImage: 'url(' + list.url + ')' }"></span>
+            <span class='back-img' :style="{ backgroundImage: 'url(' + item.url + ')' }"></span>
           </li>
           <li class='right'>
             <ol class='details'>
-              <li class='title'>{{list.title}}</li>
-              <li class='date'>{{list.date}}</li>
-              <li class='adress'>场馆:{{list.adress}}</li>
+              <li class='title'>{{item.title}}</li>
+              <li class='date'>{{item.date}}</li>
+              <li class='adress'>场馆:{{item.adress}}</li>
               <li class='logo'>
                 <ul>
                   <li class='price'>
-                    ￥{{list.price}}
+                    ￥{{item.price}}
                   </li>
                   <li class='leibie'>
-                    {{list.logo}}
+                    {{item.logo}}
                   </li>
                 </ul>
               </li>
@@ -44,22 +44,35 @@ import Store from '../../store'
 export default{
   data () {
 	  return{
-      lists:[],
+      items:Store.fetch(),
 		}
 	},
-  mounted(){
-    window.scrollTo(0,0);
-  },
   created(){
-    console.log(store.state.lists)
     // 循环通过路由传过来的数据
     for(var i=0;i<this.$route.query.product.length;i++){
       // 如果其中logo数据和vuex中存储的数据相同
       if(this.$route.query.product[i].logo==store.state.msg){
+        // console.log(this.$route.query.product[i])
         // 则将这个数据push到当前lists中
-        this.lists.push(this.$route.query.product[i]);
-        this.$store.commit('savelist',this.lists)
+        this.items.push(this.$route.query.product[i]);
       }
+    }
+  },
+  mounted(){
+    window.scrollTo(0,0);
+    console.log(this.items)
+  },
+  methods:{
+    toBack(){
+      this.items=[]
+    }
+  },
+  watch:{
+    items:{
+      handler: function (items) {
+        Store.save(items)
+      },
+      deep: false
     }
   }
 }

@@ -17,7 +17,6 @@
 export default{
 	data(){
 		return{
-			list:'',
 			title:'全部风格',
 			list1Img:[
                     {name:'金属 Metal',url: '../../static/image/home/jinshu.jpeg'},
@@ -32,6 +31,9 @@ export default{
 	created(){
 		// 获取列表
 		this.list=this.$route.query.product
+	},
+	mounted(){
+
 	},
 	methods:{
 		saveName(str1){
