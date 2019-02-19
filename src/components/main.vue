@@ -2,7 +2,7 @@
     <div>
         <h3>所有注册用户</h3>
         <ul>
-            <li v-for="item in list">
+            <li v-for="(item,index) in list">
                 {{item.username}}
             </li>
         </ul>

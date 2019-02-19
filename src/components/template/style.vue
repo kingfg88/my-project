@@ -7,7 +7,7 @@
     </div>
     <!-- 演出列表 -->
   <div class='list'>
-      <router-link :to="{path: 'details', query: {product: item}}" class='list-style' v-for='item in items'>
+      <router-link :to="{path: 'details', query: {product: item}}" class='list-style' v-for='(item,index) in items' :key='index'>
       <div class='style-content'>
         <ul class='list-style-top'>
           <li class='left'>
@@ -38,41 +38,26 @@
 </div>
 </template>
 <script>
-import store from '../../vuex/store'
 import {setCookie,getCookie} from '../../cookie.js'
-import Store from '../../store'
 export default{
   data () {
 	  return{
-      items:Store.fetch(),
+      items:[],
 		}
 	},
-  created(){
-    // 循环通过路由传过来的数据
-    for(var i=0;i<this.$route.query.product.length;i++){
-      // 如果其中logo数据和vuex中存储的数据相同
-      if(this.$route.query.product[i].logo==store.state.msg){
-        // console.log(this.$route.query.product[i])
-        // 则将这个数据push到当前lists中
-        this.items.push(this.$route.query.product[i]);
-      }
-    }
+  created(){ 
+    let listName = this.$store.state.msg;
+    // 从vuex中筛选对应list
+    this.items = this.$store.state.lists.filter(function(item){
+      return item.logo === listName
+    });
   },
   mounted(){
     window.scrollTo(0,0);
-    console.log(this.items)
   },
   methods:{
     toBack(){
       this.items=[]
-    }
-  },
-  watch:{
-    items:{
-      handler: function (items) {
-        Store.save(items)
-      },
-      deep: false
     }
   }
 }

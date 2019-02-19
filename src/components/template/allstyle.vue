@@ -6,9 +6,9 @@
       <h1 v-text='title'>{{$store.state.msg}}</h1>
     </div>
 	<div class="body-style">
-		<router-link :to="{path: 'style', query: {product: list}}" @click.native='saveName(str1)' v-for="str1 in list1Img" :style="{ backgroundImage: 'url(' + str1.url + ')' }">
-            <span class='stylename' v-text='str1.name'></span>
-        </router-link>
+		<router-link :to="{path: 'style'}" @click.native='saveName(str1)' v-for="(str1,index) in list1Img" :key='index' :style="{ backgroundImage: 'url(' + str1.url + ')' }">
+				<span class='stylename' v-text='str1.name'></span>
+		</router-link>
 	</div>
    </div>
 </div>
@@ -19,27 +19,25 @@ export default{
 		return{
 			title:'全部风格',
 			list1Img:[
-                    {name:'金属 Metal',url: '../../static/image/home/jinshu.jpeg'},
-                    {name:'后摇 Post-Rock',url: '../../static/image/home/houyao.jpg'},
-                    {name:'民谣 Folk',url: '../../static/image/home/minyao.jpeg'},
-                    {name:'摇滚 Rock',url: '../../static/image/home/yaogun.jpeg'},
-                    {name:'流行 Pop',url: '../../static/image/home/liuxing.jpeg'},
-                    {name:'嘻哈 Hip Hop',url: '../../static/image/home/xiha.jpeg'}
-                ],
+					{name:'金属 Metal',url: '../../static/image/home/jinshu.jpeg'},
+					{name:'后摇 Post-Rock',url: '../../static/image/home/houyao.jpg'},
+					{name:'民谣 Folk',url: '../../static/image/home/minyao.jpeg'},
+					{name:'摇滚 Rock',url: '../../static/image/home/yaogun.jpeg'},
+					{name:'流行 Pop',url: '../../static/image/home/liuxing.jpeg'},
+					{name:'嘻哈 Hip Hop',url: '../../static/image/home/xiha.jpeg'}
+			],
 		}
 	},
 	created(){
 		// 获取列表
-		this.list=this.$route.query.product
-	},
-	mounted(){
-
+		// this.list=this.$route.query.product
+		// console.log(this.list);
 	},
 	methods:{
 		saveName(str1){
-                var message=str1.name.replace(/[^\u4e00-\u9fa5]/gi,"")
-                this.$store.commit('change',message)
-            }
+			var message=str1.name.replace(/[^\u4e00-\u9fa5]/gi,"")
+			this.$store.commit('change',message)
+		}
 	}
 }
 </script>

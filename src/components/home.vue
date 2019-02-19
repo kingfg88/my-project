@@ -24,7 +24,7 @@
     <div class="style">
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <router-link :to="{path: 'style', query: {product: list}}" @click.native='saveName(str1)' class="swiper-slide" v-for="str1 in list1Img" :style="{ backgroundImage: 'url(' + str1.url + ')' }">
+                <router-link :to="{path: 'style', query: {product: list}}" @click.native='saveName(str1)' class="swiper-slide" v-for="(str1,index) in list1Img" :key='index' :style="{ backgroundImage: 'url(' + str1.url + ')' }">
                   <span class='stylename' v-text='str1.name'></span>
                 </router-link>
             </div>
@@ -35,7 +35,7 @@
   <!-- 演出列表 -->
   <div>
     <h1 class='tel show'>演出活动</h1>
-    <router-link :to="{path: 'details', query: {product: item}}" class='list-yanchu' v-for='item in list'>
+    <router-link :to="{path: 'details', query: {product: item}}" class='list-yanchu' v-for='(item,index) in list' :key='index'>
       <div class='yanchu-content'>
         <ul class='list-yanchu-top'>
           <li class='left'><span class='back-img' :style="{ backgroundImage: 'url(' + item.url + ')' }"></span></li>
@@ -131,31 +131,31 @@ export default {
   },
   components:{Pfooter,Pheader,'app-banner': Banner},
   mounted(){
+      var swiper = new Swiper('.style .swiper-container', {
+          slidesPerView: 2.2,
+          paginationClickable: true,
+          spaceBetween: 10,
+          freeMode: true
+      });
 
-            var swiper = new Swiper('.style .swiper-container', {
-                slidesPerView: 2.2,
-                paginationClickable: true,
-                spaceBetween: 10,
-                freeMode: true
-            });
-
-            /*页面挂载获取保存的cookie值，渲染到页面上*/
-            let uname = getCookie('username')
-            this.name = uname
-            /*如果cookie不存在，则跳转到登录页*/
-            if(uname == ""){
-                this.$router.push('/')
-            }
-            // juery操作dom方法以及设置滚动条
-            $("div[class='fenge']:last").css({'height':'2rem','line-height':'2rem'}).html('我是有底线的');
-            window.scrollTo(0,0);
+      /*页面挂载获取保存的cookie值，渲染到页面上*/
+      let uname = getCookie('username')
+      this.name = uname
+      /*如果cookie不存在，则跳转到登录页*/
+      if(uname == ""){
+          this.$router.push('/')
+      }
+      // juery操作dom方法以及设置滚动条
+      $("div[class='fenge']:last").css({'height':'2rem','line-height':'2rem'}).html('我是有底线的');
+      window.scrollTo(0,0);
+      this.$store.commit('savelist',this.list)
   },
   methods:{
-            // 获取只含中文类名并且存入到vuex中
-            saveName(str1){
-                var message=str1.name.replace(/[^\u4e00-\u9fa5]/gi,"")
-                this.$store.commit('change',message)
-            }
+      // 获取只含中文类名并且存入到vuex中
+      saveName(str1){
+          var message=str1.name.replace(/[^\u4e00-\u9fa5]/gi,"")
+          this.$store.commit('change',message)
+      }
   }
 }
 

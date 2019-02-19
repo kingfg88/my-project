@@ -7,7 +7,7 @@
 				演出互动群
 				<span class='xiahua'></span>
 			</p>
-    		<div class='qun' v-for='item in list'>
+    		<div class='qun' v-for='(item,index) in list' :key='index'>
       			<div class='qun-content'>
         			<ul class='qun-top'>
           				<li class='left'><span class='back-img' :style="{ backgroundImage: 'url(' + item.url + ')' }"></span></li>
@@ -28,7 +28,7 @@
 				本地livehouse
 				<span class='xiahua'></span>
 			</p>
-			<div class='live' v-for='item in liveList'>
+			<div class='live' v-for='(item,index) in liveList' :key='index'>
 				<span class='big-img' :style="{ backgroundImage: 'url(' + item.url + ')' }">
 					<i class='position-img' :style="{ backgroundImage: 'url(' + item.url1 + ')' }"></i>
 				</span>

@@ -29,9 +29,6 @@ const routes = [
     {
         path:'/style',
         component:style,
-        meta:{
-            keepAlive: true // 需要被缓存
-        }
     },
     {
         path:'/allstyle',
@@ -81,6 +78,13 @@ router.beforeEach((to,from,next)=>{
         }
     }
 })
+// router.beforeEach((to,from,next)=>{
+//     if(Object.keys(to.params).length === 0){
+//         Object.assign(to.params,store.state.paramMap[to.name]||{})
+//     }
+//     store.commit('refreshparam',{key:to.name,value:to.params})
+//     next();
+// })
 // 设置返回动画
 router.goBack = function () { 
 　　this.isBack = true
