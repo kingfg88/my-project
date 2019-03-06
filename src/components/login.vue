@@ -112,15 +112,14 @@
             this.pwordtishi=true
           }
         },
-        // 验证
+        // 登陆
     		login(){
         		if(this.username == "" || this.password == ""){
             		alert("请输入用户名或密码")
         		}else{
             		let data = {'username':this.username,'password':this.password}
-            		/*接口请求*/
+                /*接口请求*/
             		this.$http.post('http://127.0.0.1:3000/login',data,{emulateJSON:true}).then((res)=>{
-                		console.log(res)
              			/*接口的传值是(-1,该用户不存在),(0,密码错误)，同时还会检测管理员账号的值*/
               			if(res.data == -1){
                   			this.tishi = "该用户不存在"
@@ -136,9 +135,12 @@
                       		this.$router.push('/home')
                   		  }.bind(this),1000)
                     }
-          			})
+          			}).catch((error)=>{
+                  console.log(error)
+                })
       				}
-    		},
+        },
+        //注册
     		register(){
             if(this.newUsername == "" || this.newPassword == ""){
                 alert("请输入用户名或密码")

@@ -28,11 +28,6 @@ export default{
 			],
 		}
 	},
-	created(){
-		// 获取列表
-		// this.list=this.$route.query.product
-		// console.log(this.list);
-	},
 	methods:{
 		saveName(str1){
 			var message=str1.name.replace(/[^\u4e00-\u9fa5]/gi,"")

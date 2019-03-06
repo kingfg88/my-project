@@ -6,8 +6,11 @@
     		</div>
     		<div class="detail-content">
     			<ul>
+					<li class="back_color">
+						<span :style="{ backgroundImage: 'url(' + item.url + ')' }"></span>
+					</li>
     				<li class='image'>
-    					<span :style="{ backgroundImage: 'url(' + item.url + ')' }"></span>
+						<img v-lazy="item.url" :src="item.url" alt="">
     				</li>
     				<li><h3>{{item.title}}</h3></li>
     				<li class='price'>￥{{item.price}}</li>
@@ -40,13 +43,18 @@ export default{
 }
 </script>
 <style>
+image[lazy=loading] {
+  width: 40px;
+  height: 300px;
+  margin: auto;
+}
 .detail{
 	margin-top:3rem;
 }
 .header-detail{
   height:3rem;
   line-height: 3rem;
-  background:#fff;
+  background:transparent;
   margin:0;
   position:fixed;
   top:0;
@@ -59,11 +67,23 @@ export default{
 .detail-content li{
 	list-style: none;
 }
-.detail-content .image span{
+.detail-content .back_color span{
+	display: inline-block;
+	width:100%;
+	height:12rem;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:-1;
+	opacity: 0.2;
+	background-size:300% 100%;
+	filter: blur(10px);
+}
+.detail-content .image img{
 	display: inline-block;
 	width:45%;
 	height:12rem;
-	/*border-radius: 8px;*/
+	border-radius: 8px;
 	background-size: 100% 100%;
 }
 .detail-content li h3{

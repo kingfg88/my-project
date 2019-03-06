@@ -80,53 +80,89 @@ export default {
           {url: '../../static/image/home/banner3.jpg'},
           {url: '../../static/image/home/banner4.jpg'},
           {url: '../../static/image/home/banner5.jpg'}
-        ],
-        list1Img:[
-                    {name:'金属 Metal',url: '../../static/image/home/jinshu.jpeg'},
-                    {name:'后摇 Post-Rock',url: '../../static/image/home/houyao.jpg'},
-                    {name:'民谣 Folk',url: '../../static/image/home/minyao.jpeg'},
-                    {name:'摇滚 Rock',url: '../../static/image/home/yaogun.jpeg'},
-                    {name:'流行 Pop',url: '../../static/image/home/liuxing.jpeg'},
-                    {name:'嘻哈 Hip Hop',url: '../../static/image/home/xiha.jpeg'}
-                ],
-        list:[
-          {
-            url:'../../static/image/home/qiyingli.jpeg',
-            title:'迷蝶 后摇  The seven mile journey',
-            date:'12.06 20:00 本周三',
-            adress:'迷蝶酒吧[西安]',
-            logo:'后摇',
-            price:'100',
-            collet:'66'
-          },
-          {
-            url:'../../static/image/home/sude.jpg',
-            title:'1973 摇滚 Sude(山羊皮)',
-            date:'12.09 20:00 本周六',
-            adress:'1973酒吧[西安]',
-            logo:'摇滚',
-            price:'120',
-            collet:'99'
-          },
-          {
-            url:'../../static/image/home/tangchao.jpeg',
-            title:'迷蝶固定场 金属摇滚 唐朝乐队',
-            date:'12.01 20:00 下周五',
-            adress:'迷蝶酒吧[西安]',
-            logo:'金属',
-            price:'80',
-            collet:'33'
-          },
-          {
-            url:'../../static/image/home/tangchao.jpeg',
-            title:'迷蝶固定场 金属摇滚 唐朝乐队',
-            date:'12.01 20:00 下周五',
-            adress:'迷蝶酒吧[西安]',
-            logo:'金属',
-            price:'80',
-            collet:'33'
-          }
-        ]
+      ],
+      list1Img:[
+                  {name:'金属 Metal',url: '../../static/image/home/jinshu.jpeg'},
+                  {name:'后摇 Post-Rock',url: '../../static/image/home/houyao.jpg'},
+                  {name:'民谣 Folk',url: '../../static/image/home/minyao.jpeg'},
+                  {name:'摇滚 Rock',url: '../../static/image/home/yaogun.jpeg'},
+                  {name:'流行 Pop',url: '../../static/image/home/liuxing.jpeg'},
+                  {name:'嘻哈 Hip Hop',url: '../../static/image/home/xiha.jpeg'}
+              ],
+      list:[
+        {
+          url:'../../static/image/home/qiyingli.jpeg',
+          title:'迷蝶 后摇  The seven mile journey',
+          date:'12.06 20:00 本周三',
+          adress:'迷蝶酒吧[西安]',
+          logo:'后摇',
+          price:'200',
+          collet:'100'
+        },
+        {
+          url:'../../static/image/home/sude.jpg',
+          title:'1973 摇滚 Sude(山羊皮)',
+          date:'12.09 20:00 本周六',
+          adress:'1973酒吧[西安]',
+          logo:'摇滚',
+          price:'120',
+          collet:'75'
+        },
+        {
+          url:'../../static/image/home/tangchao.jpeg',
+          title:'迷蝶固定场 金属摇滚 唐朝乐队',
+          date:'12.01 20:00 下周五',
+          adress:'迷蝶酒吧[西安]',
+          logo:'金属',
+          price:'150',
+          collet:'80'
+        },
+        {
+          url:'../../static/image/home/summoning.jpg',
+          title:'光圈Club 氛围黑金属 Summoning',
+          date:'12.01 20:00 下周五',
+          adress:'光圈Club[西安]',
+          logo:'金属',
+          price:'800',
+          collet:'100'
+        },
+        {
+          url:'../../static/image/home/zangshihu.jpg',
+          title:'光音拾陆 氛围黑金属 葬尸湖',
+          date:'12.01 20:00 下周五',
+          adress:'光音拾陆[西安]',
+          logo:'金属',
+          price:'560',
+          collet:'90'
+        },
+        {
+          url:'../../static/image/home/minyao.jpg',
+          title:'迷蝶固定场 民谣 民谣乐队',
+          date:'12.01 20:00 下周五',
+          adress:'迷蝶酒吧[西安]',
+          logo:'民谣',
+          price:'50',
+          collet:'80'
+        },
+        {
+          url:'../../static/image/home/liuxing.jpg',
+          title:'迷蝶固定场 迈克.杰克逊',
+          date:'12.01 20:00 下周五',
+          adress:'迷蝶酒吧[西安]',
+          logo:'流行',
+          price:'80',
+          collet:'50'
+        },
+        {
+          url:'../../static/image/home/regou.jpg',
+          title:'迷蝶固定场 热狗',
+          date:'12.01 20:00 下周五',
+          adress:'迷蝶酒吧[西安]',
+          logo:'嘻哈',
+          price:'20',
+          collet:'3'
+        }
+      ]
     }
   },
   components:{Pfooter,Pheader,'app-banner': Banner},

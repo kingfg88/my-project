@@ -11,7 +11,7 @@
 export default{
     data () {
       return{
-        transitionName: 'slide-right'  // 默认动态路由变化为slide-right
+        transitionName: ''  // 默认动态路由变化为slide-right
       }
     },
     watch: {
@@ -50,7 +50,7 @@ a{
 .Router {
      position: absolute;
      width: 100%;
-     transition: all 0.5s ease;
+     transition: all 1s ease;
 }
 
 .slide-left-enter,
