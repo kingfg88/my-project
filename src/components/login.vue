@@ -14,7 +14,7 @@
           
           <div class="pword">
             <input type="password" placeholder="请输入密码" v-model="password">
-            <i :class="{ 'icon iconfont icon-yanjingbiqilai': close, 'icon iconfont icon-zhengyan': open }" @click='change()'></i>
+            <i :class="open?'icon iconfont icon-yanjingbiqilai':'icon iconfont icon-zhengyan'" @click='change()'></i>
           </div>
           
           <button v-on:click="login">登录</button>
@@ -33,8 +33,8 @@
           </div>
           <span v-show="usertishi">{{usermsg}}</span>
           <div class="pword">
-            <input type="password" placeholder="请设置登录密码" v-model="newPassword"  @blur='ptishi()'>
-            <i :class="{ 'icon iconfont icon-yanjingbiqilai': close, 'icon iconfont icon-zhengyan': open }" @click='change()'></i>
+            <input type="password" placeholder="请设置登录密码" v-model="newPassword"  @blur='ptishi()' :type="open?'text':'password'">
+            <i :class="{ 'icon iconfont icon-zhengyan':'icon iconfont icon-yanjingbiqilai' }" @click='change()'></i>
           </div>
           <span v-show="pwordtishi">{{pwordmsg}}</span>
           <button v-on:click="register">注册</button>
@@ -56,7 +56,6 @@
         password: '',
         newUsername: '',
         newPassword: '',
-        close:true,
         open:false,
         usertishi:false,
         usermsg:'',
@@ -76,15 +75,7 @@
         },
         // 注册登录密码是否明文
         change(){
-            this.close=!this.close;
             this.open=!this.open;
-            for(var i=0;i<$('.pword>input').length;i++){
-              if($('.pword>input')[i].type=='text'){
-                $('.pword>input')[i].type='password'
-              }else{
-                $('.pword>input')[i].type='text'
-              }
-            }
         },
         // 手机号码验证
         utishi(){
